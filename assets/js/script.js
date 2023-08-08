@@ -1,8 +1,8 @@
 const searchInput = document.querySelector(".search-bar");
 const searchButton = document.querySelector(".search-btn");
-const current = document.querySelector("#current-container");
-const forecast = document.querySelector("#forecast-container");
-const search = document.getElementById('search-form')
+const currentContainerEl = document.querySelector("#current-container");
+const forecastContainerEl = document.querySelector("#forecast-container");
+const searchForm = document.getElementById('search-form')
 
 
 
@@ -23,30 +23,30 @@ search.addEventListener('submit', (event) => {
             card.classList.add('card')
 
             const date = new Date(myWeatherForecastData.dt * 1000)
-            const dateElement = document.createElement('h2')
-            dateElement.textContent = date.toLocaleDateString()
-            card.appendChild(dateElement)
+            const dateEl = document.createElement('h2')
+            dateEl.textContent = date.toLocaleDateString()
+            card.appendChild(dateEl)
 
-            const iconCode = myWeatherForecastData.myWeather[0].icon
-            const iconUrl = `https://openmyWeathermap.org/img/w/${iconCode}.png`
-            const iconElement = document.createElement('img')
-            iconElement.src = iconUrl
-            card.appendChild(iconElement)
+            // const iconCode = myWeatherForecastData.myWeather[0].icon
+            // const iconUrl = `https://openmyWeathermap.org/img/w/${iconCode}.png`
+            // const iconEl = document.createElement('img')
+            // iconEl.src = iconUrl
+            // card.appendChild(iconEl)
 
             const temp = myWeatherForecastData.main.temp;
-            const tempElement = document.createElement('p')
-            tempElement.textContent = `Temp: ${temp}°F`
-            card.appendChild(tempElement)
+            const tempEl = document.createElement('p')
+            tempEl.textContent = `Temp: ${temp}°F`
+            card.appendChild(tempEl)
 
             const humidity = myWeatherForecastData.main.humidity;
-            const humidityElement = document.createElement('p')
-            humidityElement.textContent = `Humidity: ${humidity}%`
-            card.appendChild(humidityElement)
+            const humidityEl = document.createElement('p')
+            humidityEl.textContent = `Humidity: ${humidity}%`
+            card.appendChild(humidityEl)
 
             const wind = myWeatherForecastData.wind.speed
-            const windElement = document.createElement('p')
-            windElement.textContent = `Wind Speed: ${wind}MPH`
-            card.appendChild(windElement)
+            const windEl = document.createElement('p')
+            windEl.textContent = `Wind Speed: ${wind}MPH`
+            card.appendChild(windEl)
 
             forecastContainerElement.appendChild(card)
 
@@ -62,7 +62,7 @@ search.addEventListener('submit', (event) => {
 const myWeather = {
     "apiKey": "ba36b8695cd92a0a3a7aba14b53fc6e5",
     fetchmyWeather: function(newCity) {
-        fetch("https://api.openmyWeathermap.org/data/2.5/myWeather?q=" + newCity + "&units=imperial&appid=" + this.apiKey)
+        fetch('https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}')
         .then((response) => response.json())
         .then((data) => this.displaymyWeather(data));
     },
